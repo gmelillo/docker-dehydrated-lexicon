@@ -1,0 +1,7 @@
+certs/*
+accounts/*
+chains/*
+domains.txt
+.DS_Store
+domains-*.txt
+docker-compose.*.yaml
