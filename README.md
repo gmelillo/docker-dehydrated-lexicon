@@ -38,11 +38,11 @@ services:
 
 `docker run`
 ```bash
-docker run -n letsencrypt \
-  -v ./certs:/dehydrated/certs \
-  -v ./domains.txt:/dehydrated/domains.txt \
-  -v ./accounts:/dehydrated/accounts \
-  -v ./chains:/dehydrated/chains \
+docker run --it --rm --name letsencrypt \
+  -v "$(pwd)/certs:/dehydrated/certs" \
+  -v "$(pwd)/domains.txt:/dehydrated/domains.txt" \
+  -v "$(pwd)/accounts:/dehydrated/accounts" \
+  -v "$(pwd)/chains:/dehydrated/chains" \
   -e LEXICON_DIGITALOCEAN_TOKEN="DO_TOKEN_GENERATED_ON_THE_SITE" \
   -e PROVIDER="digitalocean" \
   gmelillo/dehydrated-lexicon:latest
