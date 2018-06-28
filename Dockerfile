@@ -2,7 +2,7 @@ FROM python:3-alpine3.6
 MAINTAINER Gabriel Melillo <gabriel@melillo.me>
 
 # Variables needed on setup
-ARG DEHYDRATED_VERSION="0.5.0"
+ARG DEHYDRATED_VERSION="0.6.2"
 
 # Setup the environment
 RUN apk add --update curl openssl bash && \
