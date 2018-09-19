@@ -1,15 +1,15 @@
-FROM python:3-alpine3.6
+FROM python:3.7.0-alpine3.8
 MAINTAINER Gabriel Melillo <gabriel@melillo.me>
 
 # Variables needed on setup
 ARG DEHYDRATED_VERSION="0.6.2"
 
 # Setup the environment
-RUN apk add --update curl openssl bash && \
+RUN apk add --update --no-cache gcc build-base python3-dev libffi-dev libressl-dev curl openssl bash && \
     curl -L https://github.com/lukas2511/dehydrated/archive/v${DEHYDRATED_VERSION}.tar.gz | tar -xz -C / && \
     mv /dehydrated-${DEHYDRATED_VERSION} /dehydrated && \
     mkdir -p /dehydrated/hooks /dehydrated/certs /dehydrated/accounts && \
-    pip install dns-lexicon && \
+    pip install --no-cache-dir dns-lexicon && \
     rm -rf /var/cache/apk/* ~/.cache
 
 # Add necessary script to the image.
