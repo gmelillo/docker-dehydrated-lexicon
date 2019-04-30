@@ -1,5 +1,6 @@
-FROM python:3.7.0-alpine3.8
-MAINTAINER Gabriel Melillo <gabriel@melillo.me>
+FROM python:3.7.3-alpine3.9
+
+LABEL maintainer="gabriel@melillo.me"
 
 # Variables needed on setup
 ARG DEHYDRATED_VERSION="0.6.2"

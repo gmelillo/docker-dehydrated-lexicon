@@ -5,3 +5,6 @@ domains.txt
 .DS_Store
 domains-*.txt
 docker-compose.*.yaml
+dehydrated/
+clair/
+*.pfx
