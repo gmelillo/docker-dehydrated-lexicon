@@ -3,7 +3,7 @@ FROM python:3.7.4-alpine3.9
 LABEL maintainer="gabriel@melillo.me"
 
 # Variables needed on setup
-ARG DEHYDRATED_VERSION="0.6.2"
+ARG DEHYDRATED_VERSION="0.6.5"
 
 # Setup the environment
 RUN apk add --update --no-cache gcc build-base python3-dev libffi-dev libressl-dev curl openssl bash && \
