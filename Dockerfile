@@ -11,7 +11,8 @@ RUN apk add --update --no-cache gcc build-base python3-dev libffi-dev libressl-d
     mv /dehydrated-${DEHYDRATED_VERSION} /dehydrated && \
     mkdir -p /dehydrated/hooks /dehydrated/certs /dehydrated/accounts && \
     pip install --no-cache-dir dns-lexicon && \
-    rm -rf /var/cache/apk/* ~/.cache
+    rm -rf /var/cache/apk/* ~/.cache /root/.cargo && \
+    apk del --no-cache gcc build-base python3-dev libffi-dev libressl-dev openssl-dev musl-dev rust cargo
 
 # Add necessary script to the image.
 COPY entrypoint.sh /entrypont.sh
