@@ -39,4 +39,4 @@ VOLUME '/dehydrated/accounts'
 VOLUME '/dehydrated/chains'
 VOLUME '/dehydrated/domains.txt'
 
-ENTRYPOINT /entrypont.sh
+ENTRYPOINT ["/entrypont.sh"]
