@@ -21,7 +21,8 @@ COPY dehydrated.default.sh /dehydrated/hooks/dehydrated.default.sh
 # Ensure the required permissions on the executables.
 RUN chmod +x /dehydrated/hooks/dehydrated.default.sh && \
     chmod +x /entrypont.sh && \
-    chmod +x /dehydrated/dehydrated
+    chmod +x /dehydrated/dehydrated && \
+    chmod +w /dehydrated
 
 # Provider to be used on lexicon.
 # See a list of allowed provider on the project page.
