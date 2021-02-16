@@ -1,4 +1,4 @@
-FROM python:3.8.0b1-alpine3.9
+FROM python:alpine
 
 LABEL maintainer="gabriel@melillo.me"
 
@@ -6,7 +6,7 @@ LABEL maintainer="gabriel@melillo.me"
 ARG DEHYDRATED_VERSION="0.6.5"
 
 # Setup the environment
-RUN apk add --update --no-cache gcc build-base python3-dev libffi-dev libressl-dev curl openssl bash && \
+RUN apk add --update --no-cache gcc build-base python3-dev libffi-dev libressl-dev curl openssl openssl-dev musl-dev rust cargo bash && \
     curl -L https://github.com/lukas2511/dehydrated/archive/v${DEHYDRATED_VERSION}.tar.gz | tar -xz -C / && \
     mv /dehydrated-${DEHYDRATED_VERSION} /dehydrated && \
     mkdir -p /dehydrated/hooks /dehydrated/certs /dehydrated/accounts && \
