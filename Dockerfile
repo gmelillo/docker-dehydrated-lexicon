@@ -1,17 +1,18 @@
-FROM python:3.8.0b1-alpine3.9
+FROM python:alpine
 
 LABEL maintainer="gabriel@melillo.me"
 
 # Variables needed on setup
-ARG DEHYDRATED_VERSION="0.6.5"
+ARG DEHYDRATED_VERSION="0.7.0"
 
 # Setup the environment
-RUN apk add --update --no-cache gcc build-base python3-dev libffi-dev libressl-dev curl openssl bash && \
-    curl -L https://github.com/lukas2511/dehydrated/archive/v${DEHYDRATED_VERSION}.tar.gz | tar -xz -C / && \
+RUN apk add --update --no-cache gcc build-base python3-dev libffi-dev libressl-dev curl openssl openssl-dev musl-dev rust cargo bash && \
+    curl -L https://github.com/dehydrated-io/dehydrated/archive/v${DEHYDRATED_VERSION}.tar.gz | tar -xz -C / && \
     mv /dehydrated-${DEHYDRATED_VERSION} /dehydrated && \
     mkdir -p /dehydrated/hooks /dehydrated/certs /dehydrated/accounts && \
     pip install --no-cache-dir dns-lexicon && \
-    rm -rf /var/cache/apk/* ~/.cache
+    rm -rf /var/cache/apk/* ~/.cache /root/.cargo && \
+    apk del --no-cache gcc build-base python3-dev libffi-dev libressl-dev openssl-dev musl-dev rust cargo
 
 # Add necessary script to the image.
 COPY entrypoint.sh /entrypont.sh
@@ -20,7 +21,8 @@ COPY dehydrated.default.sh /dehydrated/hooks/dehydrated.default.sh
 # Ensure the required permissions on the executables.
 RUN chmod +x /dehydrated/hooks/dehydrated.default.sh && \
     chmod +x /entrypont.sh && \
-    chmod +x /dehydrated/dehydrated
+    chmod +x /dehydrated/dehydrated && \
+    chmod +w /dehydrated
 
 # Provider to be used on lexicon.
 # See a list of allowed provider on the project page.
@@ -37,4 +39,4 @@ VOLUME '/dehydrated/accounts'
 VOLUME '/dehydrated/chains'
 VOLUME '/dehydrated/domains.txt'
 
-ENTRYPOINT /entrypont.sh
+ENTRYPOINT ["/entrypont.sh"]
